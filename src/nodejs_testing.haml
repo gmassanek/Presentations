@@ -1,0 +1,242 @@
+.slide
+  %h1.title Testing Node.js with Jasmine
+
+.slide
+  %h2 Async Testing
+
+  %pre(class = 'brush: js;')
+    :preserve
+      var asyncWork = function(callback) {
+        setTimeout(callback, 200);
+      };
+
+      describe('async', function(){
+        it('test', function(){
+          var called = false;
+          asyncWork(function() {
+            called = true;
+          });
+
+          waitsFor(function(){ return called; });
+
+          runs(function(){
+            expect(called).toBeTruthy();
+          });
+        });
+      });
+
+.slide 
+  %h2 Simple Mocking
+
+  %pre(class='brush: js;')
+    :preserve
+      var read = function() {
+        var stdin = process.openStdin();
+
+        stdin.on('data', function (data) {
+          console.log(data);
+        });
+      };
+
+.slide
+  %h2 Simple Mocking
+  %pre(class='brush: js;')
+    :preserve
+      describe('stdin', function(){
+        it('test', function(){
+          var ev = new events.EventEmitter();
+          process.openStdin = function () { return ev; };
+
+          var result = null;
+          console.log = function(msg) {
+            result = msg;
+          };
+
+          read();
+          ev.emit('data', 'something');
+
+          waitsFor(function(){ return result; });
+          runs(function(){
+            expect(result).toEqual('something');
+      }); }); });
+
+.slide
+  %h2 Spies
+  %pre(class='brush: js;')
+    :preserve
+      var module = {
+        actOne: function(){
+          this.actTwo();
+        },
+        actTwo: function(){
+          console.log('act two!');
+        }
+      };
+
+      describe("spies test", function(){
+        it("can spy", function(){
+          spyOn(module, 'actTwo')
+          module.actOne();
+          expect(module.actTwo).toHaveBeenCalled();
+        });
+      });
+
+.slide
+  %h2 Spies
+  %pre(class='brush: js;')
+    :preserve
+      var asyncWork= function(callback){
+        callback();
+      };
+
+      describe("spies test", function(){
+        it("can spy", function(){
+          var spy = jasmine.createSpy();
+          asyncWork(spy);
+          expect(spy).toHaveBeenCalled();
+        });
+      });
+
+.slide
+  %h2 Avoiding Test Pollution
+  %pre(class='brush: js;')
+    :preserve
+      describe('test pollution', function(){
+        it('pollute tests', function(){
+          process.openStdin = function () { return 1; };
+          //test stuff
+        });
+
+        it('polluted test', function(){
+          expect(function(){
+            //process.openStdin is still mocked here!
+            process.openStdin().on('data', function(data) {
+              //process data
+            });
+          }).toThrow(new Error("Object 1 has no method 'on'"));
+        });
+      });
+
+
+.slide
+  %h2 Avoiding Test Pollution
+  %pre(class='brush: js;')
+    :preserve
+      describe('fixed test pollution', function(){
+        beforeEach(function(){
+          this._openStdin = process.openStdin;
+        });
+
+        afterEach(function(){
+         process.openStdin = this._openStdin;
+        });
+
+        var mockedOpenStdin = function(){ return 1; };
+
+        it('no longer pollute tests', function(){
+          process.openStdin = mockedOpenStdin;
+        });
+
+        it('no longer polluted test', function(){
+          expect(process.openStdin).toNotEqual(mockedOpenStdin);
+      }); });
+
+.slide
+  %h2 Mocking Dates
+  %pre(class='brush: js;')
+    :preserve
+      global.currentDate = function(){
+        return new Date();
+      };
+
+      var fakeDate = function(year, month, day) {
+        spyOn(global, "currentDate").andCallFake(function() { 
+          return new Date(year, month, day);
+        });
+      };
+
+      describe("date test", function(){
+        it("can spy currentDate", function(){
+          fakeDate(2001, 11, 11);
+
+          var now = global.currentDate();
+          expect(now.getFullYear()).toEqual(2001);
+        });
+      });
+
+.slide
+  %h2 Mocking Dates
+  %pre(class='brush: js;')
+    :preserve
+      describe("mocking Dates", function(){
+        it("can mock global.Date", function(){
+          this._Date = Date;
+          var testContext = this;
+
+          spyOn(global, 'Date').andCallFake(function(){
+            return new testContext._Date(1999, 4, 8);
+          });
+
+          var raw = new Date();
+          var old = new this._Date(1900, 10, 10);
+
+          expect(raw.getFullYear()).not.toEqual(old.getFullYear());
+        });
+      });
+
+.slide
+  %h2 Matchers
+  %ul.mini
+    %li expect(x).toEqual(y);
+    %li expect(x).toBe(y);
+    %li expect(x).toMatch(pattern);
+    %li expect(x).toBeDefined();
+    %li expect(x).toBeUndefined();
+    %li expect(x).toBeNull();
+    %li expect(x).toBeTruthy();
+    %li expect(x).toBeFalsy();
+    %li expect(x).toContain(y);
+    %li expect(x).toBeLessThan(y);
+    %li expect(x).toBeGreaterThan(y);
+    %li expect(function(){fn();}).toThrow(e);
+  %div.column2
+    %ul.mini
+      %li expect(x).not.toEqual
+
+.slide
+  %h2 Custom Matchers
+  %pre(class='brush: js;')
+    :preserve
+      var emitter = new events.EventEmitter();
+
+      describe("event emitter matcher", function(){
+        beforeEach(function(){
+          this.addMatchers({
+            toHaveListener: function(event) {
+              return this.actual.listeners(event).length > 0;
+            }
+          });
+        });
+
+        it("can test event emitter better with matchers", function(){
+          emitter.on('data', function(){ console.log('data!'); });
+          expect(emitter).toHaveListener('data');
+        });
+      });
+
+.slide
+  %h2 About
+  %h3 Sean Massa
+  %ul
+    %li @endangeredmassa
+    %li endangeredmassa@gmail.com
+
+  %h3 Resources
+  %ul.mini
+    %li
+      Node.js Platform Tests 
+      %a(href='https://github.com/joyent/node/tree/master/test') https://github.com/joyent/node/tree/master/test
+    %li
+      Jasmine
+      %a(href='http://pivotal.github.com/jasmine/') http://pivotal.github.com/jasmine/
+
