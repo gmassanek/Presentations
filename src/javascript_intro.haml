@@ -1,0 +1,349 @@
+.slide
+  %h1.title Whirlwind Tour of JavaScript
+
+.slide
+  %h2
+  %ul
+    %li 
+      %a(href="http://jsFiddle.net") jsFiddle.net
+    %li HTML Page
+  %pre(class="brush: html;")
+    :preserve
+      &lt;html&gt;
+        &lt;head&gt;
+          &lt;script type="text/javascript" 
+                  src="my_scripts.js"&gt;&lt;/script&gt;
+        &lt;/head&gt;
+        &lt;body&gt;&lt;/body&gt;
+      &lt;/html&gt;
+
+
+.slide
+  %h2 Truthy and Falsey
+  %h3 Falsey
+  %ul
+    %li false
+    %li null
+    %li undefined
+    %li '' or ""
+    %li 0
+    %li NaN
+  .column2
+    %h3 Truthy
+    %ul
+      %li All else!
+
+.slide
+  %h2 Type Coersion
+  %ul
+    %li "1" == 1
+    %li == vs ===
+
+.slide
+  %h2 Types
+  %ul
+    %li Boolean
+    %li Number
+    %li String
+    %li Array
+    %li Object
+    %li Function
+  .column2
+    %ul
+      %li true false
+      %li 100
+      %li 'Sean'
+      %li [1, "it", 3]
+      %li { key: "value" }
+      %li function doit(){}
+
+.slide
+  %h2 Numbers
+  %ul
+    %li var num = 100;
+    %li var num = parseInt("100");
+    %li var num = parseInt("023");
+    %li 100 / 3 === 33.333333
+
+.slide
+  %h2 Strings
+  %ul
+    %li 'some string!'
+    %li "some string!"
+    %li "something"[0] === "s"
+    %li "sean" + null === "seannull"
+
+.slide
+  %h2 Arrays
+  %ul
+    %li [] vs. new Array()
+    %li [].push(1) === [1]
+    %li [1].pop() === 1
+    %li [1,2,3,4,5,6].slice(2,3) === [3]
+
+.slide
+  %h2 Objects
+  %ul
+    %li {} vs. new Object
+    %li { key: "value", key2: "value"}
+    %li obj = { key: {subkey: "value"} }
+    %li obj.key.subkey === "value"
+
+.slide
+  %h2 Functions
+  %pre(class="brush: js;")
+    :preserve
+      doStuff();
+
+      function doStuff(arg1, arg2) {}
+
+      eatIt();
+
+      var eatIt = function(){}
+
+.slide
+  %h2 Inside Functions
+  %pre(class="brush: js;")
+    :preserve
+      var module = {
+        eatIt: function(){
+          //arguements
+          //this == module
+        }
+      };
+
+      module.eatIt("chicken", 3);
+
+      /* */
+
+      var Person = function(name){
+        this.name = name;
+      };
+
+      var dude = new Person('Sean');
+
+.slide
+  %h2 Function Scope
+  %pre(class="brush: js;")
+    :preserve
+      if (1===1) {
+        var name = 'Sean';
+      }
+
+      //Same scope; redefines name
+      var name = 'Sean';
+
+      /* */
+
+      var name = 'Sean';
+      var action = function(){
+        //Closures!
+        var fullName = name + ' Massa';
+        return fullName;
+      }
+
+      //Different scope!
+      typeof fullName === 'undefined';
+
+.slide
+  %h2 Async Functions
+  %pre(class="brush: js;")
+    :preserve
+      setTimeout(function(){
+        console.log('anonymous function');
+      }, 1000);
+
+      function timeoutHandler(){
+        console.log('named function');
+      }
+
+      setTimeout(timeoutHandler, 1000);
+
+      function myTimeout(callback, timeout) {
+        callback("some param");
+      }
+
+.slide
+  %h2 Prototypes
+  %pre(class="brush: js;")
+    :preserve
+      var Person = function(){
+        this.speak = function(msg){
+          console.log(msg);
+        };
+      }
+
+      /* */
+
+      var EfficientPerson = function(){};
+
+      EfficientPerson.prototype.speak = 
+        function(msg) {
+          console.log(msg);
+      };
+
+.slide
+  %h2 Inheritence with Prototypes
+  %pre(class="brush: js;")
+    :preserve
+      var Person = function(){};
+      Person.prototype.speak = function(){...};
+
+      var Employee = function(){};
+      Employee.prototype = new Person();
+
+      var emp = new Employee();
+      emp.speak();
+
+.slide
+  %h2 jQuery
+  %pre(class="brush: js;")
+    :preserve
+      //gather data, do stuff
+
+      jQuery === $
+      $.noConflict()
+      jQuery !== $
+
+      var $cards = $('.card');
+      var card = $cards[0];
+      $cards.hide();
+
+      $(function(){
+        //onload, do stuff!
+      });
+
+      var $container = $('#container')
+      var $newCard = $(
+        '<div class="card">some card</div>');
+      $container.append($newCard);
+
+.slide
+  %h2 jQuery Plugins
+  %pre(class="brush: js;")
+    :preserve
+
+      (function( $ ){
+
+        $.fn.myPlugin = function() {
+          //this == a jQuery object
+
+          this.fadeIn('normal', function(){
+            // this == a DOM element
+          });
+        };
+
+      })( jQuery );
+
+      $('#element').myPlugin();
+
+.slide
+  %h2 jQuery Events
+  %pre(class="brush: js;")
+    :preserve
+      function removeMyself(){
+        $(this).remove();
+      }
+
+      $('.card').bind('click', removeMyself);
+
+      $('input.select').bind('change', function(){
+        recalculateTotals();
+      });
+
+      $('.card').live('click', removeMyself);
+
+.slide
+  %h2 Browser Compatibility
+  %pre(class="brush: js;")
+    :preserve
+      if ( target.addEventListener )
+        target.addEventListener(
+          eventName, 
+          handlerName, 
+          false);
+
+      else if ( target.attachEvent )
+        target.attachEvent(
+          "on" + eventName, 
+          handlerName);
+
+      else
+        target["on" + eventName] = handlerName;
+
+      //jQuery will save you!
+      $(selector).bind(eventName, handler);
+
+      //newer syntax
+      $(selector).on(eventName, handler);
+
+.slide
+  %h2 CoffeeScript!
+  %pre(class="brush: js;")
+    :preserve
+      # Assignment:
+      number   = 42
+      opposite = true
+
+      # Conditions:
+      number = -42 if opposite
+
+      # Functions:
+      square = (x) -> x * x
+
+      # Arrays:
+      list = [1, 2, 3, 4, 5]
+
+      # Objects:
+      math =
+        root:   Math.sqrt
+          square: square
+            cube:   (x) -> x * square x
+
+.slide
+  %h2 CoffeeScript!
+  %pre(class="brush: js;")
+    :preserve
+      # Splats:
+      race = (winner, runners...) ->
+      print winner, runners
+
+      # Existence:
+      alert "I knew it!" if elvis?
+
+      # Array comprehensions:
+      cubes = (math.cube num for num in list)
+
+.slide
+  %h2 Node.js
+  %ul.mini
+    %li nvm => rvm
+    %li npm => gem
+    %li package.json => GemFile
+    %li require('package')
+
+  %pre(class="brush: js;")
+    :preserve
+      var http = require('http');
+
+      http.createServer(function (req, res) {
+        res.writeHead(200, 
+          {'Content-Type': 'text/plain'});
+        res.end('Hello World\n');
+      }).listen(1337, "127.0.0.1");
+
+      console.log(
+        'Running at http://localhost:1337/');
+
+.slide
+  %h2 Resources
+  %ul.mini
+    %li 
+      %a(href='http://jsfiddle.net') http://jsfiddle.net
+    %li 
+      %a(href="https://github.com/mrdavidlaing/javascript-koans") https://github.com/mrdavidlaing/javascript-koans
+    %li
+      %a(href="http://jquery.com/") http://jquery.com
+    %li
+      %a(href="http://jashkenas.github.com/coffee-script/") http://jashkenas.github.com/coffee-script
+

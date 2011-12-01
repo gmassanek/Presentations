@@ -73,6 +73,7 @@
       color: red; }
   .deck-container ul {
     vertical-align: middle;
+    margin-left: 90px;
     font-size: 66px; }
     .deck-container ul li {
       font-weight: bold; }
@@ -88,7 +89,7 @@
   .deck-container .column2 {
     position: absolute;
     left: 50%;
-    top: 200px; }
+    top: 210px; }
 
 .mini {
   font-size: 40px !important; }
