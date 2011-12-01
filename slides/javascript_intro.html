@@ -29,11 +29,21 @@
 <body class="deck-container">
 
 <div class='slide'>
-  <h1 class='title'>How to Love Javascript</h1>
+  <h1 class='title'>Whirlwind Tour of JavaScript</h1>
+</div>
+<div class='slide'>
+  <h2></h2>
+  <ul>
+    <li>
+      <a href='http://jsFiddle.net'>jsFiddle.net</a>
+    </li>
+    <li>HTML Page</li>
+  </ul>
+  <pre class='brush: html;'>&lt;html&gt;&#x000A;  &lt;head&gt;&#x000A;    &lt;script type="text/javascript" &#x000A;            src="my_scripts.js"&gt;&lt;/script&gt;&#x000A;  &lt;/head&gt;&#x000A;  &lt;body&gt;&lt;/body&gt;&#x000A;&lt;/html&gt;&#x000A;&#x000A;</pre>
 </div>
 <div class='slide'>
   <h2>Truthy and Falsey</h2>
-  <h3>Falsey Values</h3>
+  <h3>Falsey</h3>
   <ul>
     <li>false</li>
     <li>null</li>
@@ -42,11 +52,150 @@
     <li>0</li>
     <li>NaN</li>
   </ul>
+  <div class='column2'>
+    <h3>Truthy</h3>
+    <ul>
+      <li>All else!</li>
+    </ul>
+  </div>
+</div>
+<div class='slide'>
+  <h2>Type Coersion</h2>
+  <ul>
+    <li>"1" == 1</li>
+    <li>== vs ===</li>
+  </ul>
+</div>
+<div class='slide'>
+  <h2>Types</h2>
+  <ul>
+    <li>Boolean</li>
+    <li>Number</li>
+    <li>String</li>
+    <li>Array</li>
+    <li>Object</li>
+    <li>Function</li>
+  </ul>
+  <div class='column2'>
+    <ul>
+      <li>true false</li>
+      <li>100</li>
+      <li>'Sean'</li>
+      <li>[1, "it", 3]</li>
+      <li>{ key: "value" }</li>
+      <li>function doit(){}</li>
+    </ul>
+  </div>
+</div>
+<div class='slide'>
+  <h2>Numbers</h2>
+  <ul>
+    <li>var num = 100;</li>
+    <li>var num = parseInt("100");</li>
+    <li>var num = parseInt("023");</li>
+    <li>100 / 3 === 33.333333</li>
+  </ul>
+</div>
+<div class='slide'>
+  <h2>Strings</h2>
+  <ul>
+    <li>'some string!'</li>
+    <li>"some string!"</li>
+    <li>"something"[0] === "s"</li>
+    <li>"sean" + null === "seannull"</li>
+  </ul>
+</div>
+<div class='slide'>
+  <h2>Arrays</h2>
+  <ul>
+    <li>[] vs. new Array()</li>
+    <li>[].push(1) === [1]</li>
+    <li>[1].pop() === 1</li>
+    <li>[1,2,3,4,5,6].slice(2,3) === [3]</li>
+  </ul>
+</div>
+<div class='slide'>
+  <h2>Objects</h2>
+  <ul>
+    <li>{} vs. new Object</li>
+    <li>{ key: "value", key2: "value"}</li>
+    <li>obj = { key: {subkey: "value"} }</li>
+    <li>obj.key.subkey === "value"</li>
+  </ul>
+</div>
+<div class='slide'>
+  <h2>Functions</h2>
+  <pre class='brush: js;'>doStuff();&#x000A;&#x000A;function doStuff(arg1, arg2) {}&#x000A;&#x000A;eatIt();&#x000A;&#x000A;var eatIt = function(){}&#x000A;</pre>
+</div>
+<div class='slide'>
+  <h2>Inside Functions</h2>
+  <pre class='brush: js;'>var module = {&#x000A;  eatIt: function(){&#x000A;    //arguements&#x000A;    //this == module&#x000A;  }&#x000A;};&#x000A;&#x000A;module.eatIt("chicken", 3);&#x000A;&#x000A;/* */&#x000A;&#x000A;var Person = function(name){&#x000A;  this.name = name;&#x000A;};&#x000A;&#x000A;var dude = new Person('Sean');&#x000A;</pre>
+</div>
+<div class='slide'>
+  <h2>Function Scope</h2>
+  <pre class='brush: js;'>if (1===1) {&#x000A;  var name = 'Sean';&#x000A;}&#x000A;&#x000A;//Same scope; redefines name&#x000A;var name = 'Sean';&#x000A;&#x000A;/* */&#x000A;&#x000A;var name = 'Sean';&#x000A;var action = function(){&#x000A;  //Closures!&#x000A;  var fullName = name + ' Massa';&#x000A;  return fullName;&#x000A;}&#x000A;&#x000A;//Different scope!&#x000A;typeof fullName === 'undefined';&#x000A;</pre>
+</div>
+<div class='slide'>
+  <h2>Async Functions</h2>
+  <pre class='brush: js;'>setTimeout(function(){&#x000A;  console.log('anonymous function');&#x000A;}, 1000);&#x000A;&#x000A;function timeoutHandler(){&#x000A;  console.log('named function');&#x000A;}&#x000A;&#x000A;setTimeout(timeoutHandler, 1000);&#x000A;&#x000A;function myTimeout(callback, timeout) {&#x000A;  callback("some param");&#x000A;}&#x000A;</pre>
+</div>
+<div class='slide'>
+  <h2>Prototypes</h2>
+  <pre class='brush: js;'>var Person = function(){&#x000A;  this.speak = function(msg){&#x000A;    console.log(msg);&#x000A;  };&#x000A;}&#x000A;&#x000A;/* */&#x000A;&#x000A;var EfficientPerson = function(){};&#x000A;&#x000A;EfficientPerson.prototype.speak = &#x000A;  function(msg) {&#x000A;    console.log(msg);&#x000A;};&#x000A;</pre>
+</div>
+<div class='slide'>
+  <h2>Inheritence with Prototypes</h2>
+  <pre class='brush: js;'>var Person = function(){};&#x000A;Person.prototype.speak = function(){...};&#x000A;&#x000A;var Employee = function(){};&#x000A;Employee.prototype = new Person();&#x000A;&#x000A;var emp = new Employee();&#x000A;emp.speak();&#x000A;</pre>
+</div>
+<div class='slide'>
+  <h2>jQuery</h2>
+  <pre class='brush: js;'>//gather data, do stuff&#x000A;&#x000A;jQuery === $&#x000A;$.noConflict()&#x000A;jQuery !== $&#x000A;&#x000A;var $cards = $('.card');&#x000A;var card = $cards[0];&#x000A;$cards.hide();&#x000A;&#x000A;$(function(){&#x000A;  //onload, do stuff!&#x000A;});&#x000A;&#x000A;var $container = $('#container')&#x000A;var $newCard = $(&#x000A;  '<div class="card">some card</div>');&#x000A;$container.append($newCard);&#x000A;</pre>
+</div>
+<div class='slide'>
+  <h2>jQuery Plugins</h2>
+  <pre class='brush: js;'>(function( $ ){&#x000A;&#x000A;  $.fn.myPlugin = function() {&#x000A;    //this == a jQuery object&#x000A;&#x000A;    this.fadeIn('normal', function(){&#x000A;      // this == a DOM element&#x000A;    });&#x000A;  };&#x000A;&#x000A;})( jQuery );&#x000A;&#x000A;$('#element').myPlugin();&#x000A;</pre>
+</div>
+<div class='slide'>
+  <h2>jQuery Events</h2>
+  <pre class='brush: js;'>function removeMyself(){&#x000A;  $(this).remove();&#x000A;}&#x000A;&#x000A;$('.card').bind('click', removeMyself);&#x000A;&#x000A;$('input.select').bind('change', function(){&#x000A;  recalculateTotals();&#x000A;});&#x000A;&#x000A;$('.card').live('click', removeMyself);&#x000A;</pre>
+</div>
+<div class='slide'>
+  <h2>Browser Compatibility</h2>
+  <pre class='brush: js;'>if ( target.addEventListener )&#x000A;  target.addEventListener(&#x000A;    eventName, &#x000A;    handlerName, &#x000A;    false);&#x000A;&#x000A;else if ( target.attachEvent )&#x000A;  target.attachEvent(&#x000A;    "on" + eventName, &#x000A;    handlerName);&#x000A;&#x000A;else&#x000A;  target["on" + eventName] = handlerName;&#x000A;&#x000A;//jQuery will save you!&#x000A;$(selector).bind(eventName, handler);&#x000A;&#x000A;//newer syntax&#x000A;$(selector).on(eventName, handler);&#x000A;</pre>
+</div>
+<div class='slide'>
+  <h2>CoffeeScript!</h2>
+  <pre class='brush: js;'># Assignment:&#x000A;number   = 42&#x000A;opposite = true&#x000A;&#x000A;# Conditions:&#x000A;number = -42 if opposite&#x000A;&#x000A;# Functions:&#x000A;square = (x) -> x * x&#x000A;&#x000A;# Arrays:&#x000A;list = [1, 2, 3, 4, 5]&#x000A;&#x000A;# Objects:&#x000A;math =&#x000A;  root:   Math.sqrt&#x000A;    square: square&#x000A;      cube:   (x) -> x * square x&#x000A;</pre>
+</div>
+<div class='slide'>
+  <h2>CoffeeScript!</h2>
+  <pre class='brush: js;'># Splats:&#x000A;race = (winner, runners...) ->&#x000A;print winner, runners&#x000A;&#x000A;# Existence:&#x000A;alert "I knew it!" if elvis?&#x000A;&#x000A;# Array comprehensions:&#x000A;cubes = (math.cube num for num in list)&#x000A;</pre>
+</div>
+<div class='slide'>
+  <h2>Node.js</h2>
+  <ul class='mini'>
+    <li>nvm => rvm</li>
+    <li>npm => gem</li>
+    <li>package.json => GemFile</li>
+    <li>require('package')</li>
+  </ul>
+  <pre class='brush: js;'>var http = require('http');&#x000A;&#x000A;http.createServer(function (req, res) {&#x000A;  res.writeHead(200, &#x000A;    {'Content-Type': 'text/plain'});&#x000A;  res.end('Hello World\n');&#x000A;}).listen(1337, "127.0.0.1");&#x000A;&#x000A;console.log(&#x000A;  'Running at http://localhost:1337/');&#x000A;</pre>
 </div>
 <div class='slide'>
   <h2>Resources</h2>
   <ul class='mini'>
-    <li>https://github.com/mrdavidlaing/javascript-koans</li>
+    <li>
+      <a href='http://jsfiddle.net'>http://jsfiddle.net</a>
+    </li>
+    <li>
+      <a href='https://github.com/mrdavidlaing/javascript-koans'>https://github.com/mrdavidlaing/javascript-koans</a>
+    </li>
+    <li>
+      <a href='http://jquery.com/'>http://jquery.com</a>
+    </li>
+    <li>
+      <a href='http://jashkenas.github.com/coffee-script/'>http://jashkenas.github.com/coffee-script</a>
+    </li>
   </ul>
 </div>
 
