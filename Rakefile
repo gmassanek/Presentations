@@ -21,3 +21,8 @@ namespace :deck do
   end
 
 end
+
+task :deploy do
+  system('cp slides/*.html ../presentations_slides/slides/')
+end
+
