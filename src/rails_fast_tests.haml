@@ -1,0 +1,139 @@
+.slide
+  %h1.title Fast Rails Tests
+
+.slide
+  %h2 Rails: Extracting Domain Objects
+  %pre(class="brush: rb;")
+    :preserve
+      class SomeController
+        def show
+          get_result(params[:options])
+        end
+
+        private
+        def get_result(options)
+          options[:name] + ' ' + options[:age]
+        end
+      end
+
+.slide
+  %h2 Rails: Extracting Domain Objects
+  %pre(class="brush: rb;")
+    :preserve
+      class ResultModel
+        def self.get_result(options)
+          options[:name] + ' ' + options[:age]
+        end
+      end
+
+      ...
+      def show
+        ResultModel.get_result(params[:options])
+      end
+
+.slide
+  %h2 Rails: Avoiding Extra Work
+  %ul
+    %li before blocks
+    %li saving to database
+    %li excessive iteration
+    %li stub/mock ActiveRecord
+    %li stub/mock Order Service
+    %li stub/mock Deal Service
+
+.slide
+  %h2 Rails: Avoid spec_helper
+  %ul
+    %li loads rails
+    %li loads helpers
+    %li just loads a ton of crap you won't need
+
+.slide
+  %h2 Rails: Choose Factories Carefully
+  %ul
+    %li Know your factories
+    %li Read the source
+    %li Don't use for simple objects
+
+.slide
+  %h2 Rails: Fast Tests!
+  %ul
+    %li Use the spec/fast directory
+    %li Rails tests of any sort don't go here
+
+.slide
+  %h2 Jasmine: Process
+  %ul
+    %li Add your script to test to spec/javascripts/support/jasmine.yml
+    %li bundle exec rails jasmine
+    %li
+      %a(href='http://localhost:8888/run.html') http://localhost:8888/run.html
+
+.slide
+  %h2 Jasmine: Structure
+  %pre(class="brush: js;")
+    :preserve
+      describe(function(){
+        beforeEach(function(){
+          this.deal = 'Old Navy Stuff';
+        });
+
+        it(function(){
+          //test!
+          this.deal === 'Old Navy Stuff';
+        });
+      });
+
+.slide
+  %h2 Jasmine: Mocking and Spies
+  %pre(class="brush: js;")
+    :preserve
+      describe("mocking Dates", function(){
+        it("can mock global.Date", function(){
+          this._Date = Date;
+          var testContext = this;
+
+          spyOn(global, 'Date').andCallFake(function(){
+            return new testContext._Date(1999, 4, 8);
+          });
+
+          var raw = new Date();
+          var old = new this._Date(1900, 10, 10);
+
+          expect(raw.getFullYear()).not.toEqual(old.getFullYear());
+        });
+      });
+
+.slide
+  %h2 Jasmine: Fixtures
+  %ul
+    %li Create .html file with dom fragment
+    %li Use in beforeEach with
+  %pre(class="brush: js;")
+    :preserve
+      var frag = fixtures['filename no extension'];
+      $('#jasmine-content').append(frag);
+
+.slide
+  %h2 Jasmine: Live Events and Callable Bindings
+  %pre(class="brush: js;")
+    :preserve
+      $('.cards').live('click', function(){
+        //handle event
+      });
+
+      /* */
+
+      function bindEvents() {
+        $('.cards').live('click', function(){
+          //handle event
+        });
+      }
+
+.slide
+  %h2 Metrics
+  %ul
+    %li Sub-second
+    %li No spec_helper
+    %li No rails
+

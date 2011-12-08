@@ -1,0 +1,59 @@
+.slide
+  %h1.title Node.js in the Shell! 
+
+.slide
+  %h2 Setup
+  %pre(class="brush: js;")
+    :preserve
+      //Node.js and NPM
+      echo 'export NODE_PATH=
+        "'$(npm root -g)'"' >> ~/.bashrc
+
+      //Optimist
+      npm install -g optimist
+
+      //Underscore
+      npm install -g underscore
+
+.slide
+  %h2 Example
+  %pre(class="brush: js;")
+    :preserve
+      #!/usr/bin/env node
+      console.log('hey there');
+
+.slide
+  %h2 File Access
+  %pre(class="brush: js;")
+    :preserve
+      #!/usr/bin/env node
+      var argv = require('optimist').argv;
+
+
+.slide
+  %h2 System Calls
+  %pre(class="brush: js;")
+    :preserve
+      #!/usr/bin/env node
+      var argv = require('optimist').argv;
+
+
+.slide
+  %h2 Underscore
+  %pre(class="brush: js;")
+    :preserve
+      #!/usr/bin/env node
+      var argv = require('optimist').argv;
+
+
+.slide
+  %h2 CoffeeScript!
+  %pre(class="brush: js;")
+    :preserve
+      #!/usr/bin/env node
+      var argv = require('optimist').argv;
+
+.slide
+  %h2 CakeFile
+
+
