@@ -133,12 +133,13 @@
 }
 .syntaxhighlighter .toolbar {
   position: absolute !important;
-  right: 1px !important;
+  right: 12px !important;
   top: 1px !important;
   width: 11px !important;
   height: 11px !important;
   font-size: 10px !important;
   z-index: 10 !important;
+  display:none;
 }
 .syntaxhighlighter .toolbar span.title {
   display: inline !important;

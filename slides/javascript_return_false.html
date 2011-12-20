@@ -1,0 +1,118 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<meta name="viewport" content="width=1024, user-scalable=no">
+	
+	<!-- Replace path with correct path to deck.core.css. -->
+	<link rel="stylesheet" href="../lib/deck.core.css" type="text/css">
+	<link rel="stylesheet" href="../lib/swiss.css" type="text/css">
+	<link rel="stylesheet" href="../lib/fade.css" type="text/css">
+	<link rel="stylesheet" href="../lib/extensions/goto/deck.goto.css" type="text/css">
+	<link rel="stylesheet" href="../lib/extensions/hash/deck.hash.css" type="text/css">
+	<link rel="stylesheet" href="../lib/extensions/menu/deck.menu.css" type="text/css">
+	<link rel="stylesheet" href="../lib/extensions/navigation/deck.navigation.css" type="text/css">
+	<link rel="stylesheet" href="../lib/extensions/status/deck.status.css" type="text/css">
+	<link rel="stylesheet" href="../lib/extensions/scale/deck.scale.css" type="text/css">
+	<link rel="stylesheet" href="../lib/syntaxhighlighter/styles/shCore.css" type="text/css">
+	<link rel="stylesheet" href="../lib/syntaxhighlighter/styles/shThemeDefault.css" type="text/css">
+	
+	<link rel="stylesheet" href="../assets/stylesheets/style.css" type="text/css">
+  
+	
+	<!-- Any other extension CSS files go here. -->
+	
+	<!-- Replace path with correct path to Modernizr file. -->
+	<script src="../lib/modernizr.custom.js"></script>
+</head>
+
+<body class="deck-container">
+
+<div class='slide'>
+  <h1 class='title'>The "return false;" Conspiracy</h1>
+</div>
+<div class='slide'>
+  <h2>The Rule</h2>
+  <ul>
+    <li>Return False!</li>
+    <li>Prevents browser behaviour, which is good!</li>
+    <li>Wait! Prevents all browser, which is bad!</li>
+  </ul>
+</div>
+<div class='slide'>
+  <h2>The Problem</h2>
+  <ul>
+    <li>There are more than one type of click!</li>
+    <li>Right-click</li>
+    <li>Left-click</li>
+    <li>Middle-click</li>
+    <li>Alt-</li>
+    <li>Ctrl- / Cmd-</li>
+  </ul>
+</div>
+<div class='slide'>
+  <h2>Free Your Mind!</h2>
+  <ul>
+    <li>Don't block an entire class of action</li>
+  </ul>
+</div>
+<div class='slide'>
+  <h2>Solution!</h2>
+  <pre class='brush: js;'>if(...)&#x000A;  ...</pre>
+</div>
+
+
+	
+<!-- Other extension HTML snippets go here, at the bottom of the deck container. -->
+
+<form action="." method="get" class="goto-form">
+	<label for="goto-slide">Go to slide:</label>
+	<input type="number" name="slidenum" id="goto-slide">
+	<input type="submit" value="Go">
+</form>
+
+<a href="." title="Permalink to this slide" class="deck-permalink">#</a>
+
+<a href="#" class="deck-prev-link" title="Previous">&#8592;</a>
+<a href="#" class="deck-next-link" title="Next">&#8594;</a>
+
+<p class="deck-status">
+	<span class="deck-status-current"></span>
+	/
+	<span class="deck-status-total"></span>
+</p>
+
+<!-- Update these paths to point to the correct files. -->
+<script src="../lib/jquery-1.6.2.min.js"></script>
+<script src="../lib/xregexp-min.js"></script>
+<script src="../lib/deck.core.js"></script>
+<script src="../lib/extensions/goto/deck.goto.js"></script>
+<script src="../lib/extensions/hash/deck.hash.js"></script>
+<script src="../lib/extensions/menu/deck.menu.js"></script>
+<script src="../lib/extensions/navigation/deck.navigation.js"></script>
+<script src="../lib/extensions/status/deck.status.js"></script>
+<script src="../lib/extensions/scale/deck.scale.js"></script>
+<script src="../lib/syntaxhighlighter/src/shCore.js"></script>
+<script src="../lib/syntaxhighlighter/scripts/shBrushRuby.js"></script>
+<script src="../lib/syntaxhighlighter/scripts/shBrushBash.js"></script>
+<script src="../lib/syntaxhighlighter/scripts/shBrushJScript.js"></script>
+<script src="../lib/syntaxhighlighter/scripts/shBrushSql.js"></script>
+<script src="../lib/syntaxhighlighter/scripts/shBrushXml.js"></script>
+<script src="../lib/syntaxhighlighter/scripts/shBrushCss.js"></script>
+<script src="../lib/syntaxhighlighter/scripts/shBrushPlain.js"></script>
+
+<!-- Add any other extension JS files here -->
+
+
+<!-- Initialize the deck. You can put this in an external file if desired. -->
+<script>
+	$(function() {
+		$.deck('.slide');
+	});
+</script>
+
+<script type="text/javascript">
+     SyntaxHighlighter.all()
+</script>
+</body>
+</html>

@@ -1,0 +1,235 @@
+.slide
+  %h1.title Node.js for Ruby on Rails Developers
+
+.slide
+  %h2 Platform
+  %h3 Ruby on Rails
+  %ul
+    %li MRI / JRuby / etc.
+    %li Ruby
+    %li
+      Rails
+    %li Rails
+
+  .column2
+    %h3 Node.js
+    %ul
+      %li Node.js
+      %li JavaScript
+      %li
+        %a(href='http://railwayjs.com/') Railway
+        \/ Express
+      %li (Custom Setup)
+
+
+.slide
+  %h2 Tools
+  %h3 Ruby on Rails
+  %ul
+    %li rvm
+    %li gem
+    %li bundler (GemFile)
+    %li rails_async
+    %li irb
+    %li console
+
+  .column2
+    %h3 Node.js
+    %ul
+      %li nvm / n
+      %li node_module
+      %li npm (package.json)
+      %li Node.js (core)
+      %li node
+      %li rw console
+
+.slide
+  %h2 CoffeeScript
+  %pre(class="brush: js;")
+    :preserve
+      number = 42
+      number = -42 if opposite
+
+      square = (x) -> x * x
+
+      list = [1, 2, 3, 4, 5]
+
+      math =
+        root:   Math.sqrt
+        square: square
+        cube:   (x) -> x * square x
+
+      race = (winner, runners...) ->
+        print winner, runners
+
+      alert "I knew it!" if elvis?
+
+      cubes = (math.cube num for num in list)
+
+.slide
+  %h2 Testing
+  %h3 Ruby on Rails
+  %ul
+    %li rspec
+    %li cucumber
+    %li cucumber
+
+  .column2
+    %h3 Node.js
+    %ul
+      %li jasmine
+      %li
+        %a(href='https://github.com/cucumber/cucumber-js') cucumber.js
+      %li
+        %a(href='https://github.com/noblesamurai/cucumis') cucumis
+
+.slide
+  %h2 Conventions
+  %h3 Ruby
+  %ul
+    %li variable_names
+    %li method_names
+    %li ClassNames
+    %li 2 spaces
+
+  .column2
+    %h3 JavaScript
+    %ul
+      %li variableNames
+      %li methodNames
+      %li ConstructorNames
+      %li 4 spaces
+
+.slide
+  %h2 Routing in Ruby on Rails
+  %pre(class="brush: js;")
+    :preserve
+      match "/posts/:id" => "posts#show"
+
+      resources :post
+
+      resources :post, :only => [:index, :show]
+
+      resources :post do
+        resources :comments
+      end
+
+      namespace :admin do
+        resources :post
+      end
+
+.slide
+  %h2 Routing in Node.js
+  %pre(class="brush: js;")
+    :preserve
+      map.get "posts/:id", "posts#show"
+
+      map.resources "posts"
+
+      map.resources "posts", only: ['index', 'show']
+
+      map.resources 'post', (post) ->
+        post.resources 'comments'
+
+
+      namespace 'admin', (admin) ->
+        admin.resources 'posts'
+
+.slide
+  %h2 ORM
+  %h3 ActiveRecord
+  %ul
+    %li belongs_to
+    %li has_many
+    %li has_one
+    %li has_many :through
+    %li has_one :through
+    %li has_and_belongs_to_many
+
+  .column2
+    %h3 JugglingDB
+    %ul
+      %li belongsTo
+      %li hasMany
+      %li (in definition)
+
+.slide
+  %h2 Controllers
+  %h3 Ruby on Rails
+  %pre(class="brush: rb;")
+    :preserve
+      def show
+        flash[:error] = "Can't find any posts."
+        redirect 'http://www.google.com'
+        #render
+      end
+
+  %h3 Node.js
+  %pre(class="brush: rb;")
+    :preserve
+      action 'index', ->
+        flash 'error', "Can't find any posts."
+        redirect 'http://www.google.com'
+        render()
+
+.slide
+  %h2 Views
+  %pre(class="brush: js;")
+    :preserve
+      link_to('Users index', '/users', {class: 'menu-item'});
+
+      form_for(user, {action: path_to.users}, function (form) {
+        form.label('name', 'Username')
+        form.input('name')
+        form.submit('Save')
+      });
+
+      stylesheet_link_tag('reset', 'style')
+
+      javascript_include_tag(
+        'https://some.cdn.com/jquery.min.js',
+        'application')
+
+.slide
+  %h2 Generators
+  %h3 [railway|rails] generate (generator)
+  %ul
+    %li controller controllerName
+    %li model modelName field1 field2:type
+    %li scaffold modelName field1 field2:type
+
+.slide
+  %h2 Custom Setup
+  %ul
+    %li
+      %a(href="http://toolbox.no.de/") Node Toolbox
+    %li
+      %a(href="https://github.com/just-cloud/node-bootstrap") Node Bootstrap #1
+    %li
+      %a(href="https://github.com/florind/bootstrap.js") Node Bootstrap #2
+
+.slide
+  %h2 Your Turn!
+  %h3 Create a Blog with Railway
+  %ul
+    %li Setup: railway init myblog
+    %li Posts
+    %li Comments
+    %li Tags
+    %li User Accounts
+    %li Author Accounts
+
+.slide
+  %h2 About
+  %h3 Sean Massa
+  %ul
+    %li @endangeredmassa
+    %li endangeredmassa@gmail.com
+  %h3 Resources
+  %ul.mini
+    %li
+      %a(href="http://railwayjs.com/") http://railwayjs.com
+    %li
+      %a(href="http://rubyonrails.org/") http://rubyonrails.org
+
+
