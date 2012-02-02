@@ -1,0 +1,130 @@
+.slide
+  %h1.title JavaScript Patterns at Groupon
+
+.slide
+  %h2 Prototype Events
+  %pre(class = 'brush: js;')
+    :preserve
+      Event.onReady(function() {
+        // code
+      });
+
+      Event.addBehavior({
+        'a.todo:click' : function(e) {
+          // e = event object
+          // this = clicked object
+        },
+        'div.feature:mouseover' : function(e) {
+          // more code
+        }
+      });
+
+.slide
+  %h2 jQuery Events
+  %pre(class = 'brush: js;')
+    :preserve
+      //Old (and Current) Way
+
+      var handler = function(){ ... };
+
+      $('selector').bind('click', handler);
+
+      $('selector').click(handler);
+
+      $('selector').live('click', handler);
+
+      $('selector').delegate('sub-selector',
+                             'click',
+                             handler);
+
+.slide
+  %h2 jQuery Events
+  %pre(class = 'brush: js;')
+    :preserve
+      //New Way
+
+      var handler = function(){ ... };
+
+      $('selector').on('click', handler);
+
+      $('selector').on('click',
+                       'sub-selector',
+                       handler);
+
+      $('selector').off('click', handler);
+
+.slide
+  %h2 jQuery Selectors / CSS3
+  %pre(class = 'brush: js;')
+    :preserve
+      //Simple Selectors
+      $('*');
+      $('a');
+      $('#id');
+      $('.class');
+      $('.class.class2');
+
+      //Compound Selectors
+      $('#id .class');
+      $('#id > .class');
+      $('#id, #otherid');
+
+      //Psuedo Selectors
+      $('tr:even');
+      $('input:enabled');
+      $('div:visible');
+      $('li:last-child');
+      $('div:not(.class)');
+
+      //Attribute Selectors
+      $('div[id*="contains"]');
+      $('div[id$="endswith"');
+      $('div[id^="startswith"');
+
+.slide
+  %h2 Object Namespaces
+  %pre(class = 'brush: js;')
+    :preserve
+      var Groupon = {};
+      Groupon.Support = {};
+
+      Groupon.Support.jumpRope = function(){
+        console.log('jumped some rope!');
+      };
+
+.slide
+  %h2 Object Extensions
+  %pre(class = 'brush: js;')
+    :preserve
+      function drawGraph(customOptions) {
+        customOptions = customOptions || {};
+
+        var options = {
+          width: 100,
+          height: 100,
+          color: '#2D3',
+          circles: 12
+        };
+
+        $.extend(true, options, customOptions);
+
+        console.log('drawing graph with options:');
+        console.log(def
+      }
+
+      drawGraph({
+        height: 200,
+        circles: 1
+      });
+
+.slide
+  %h2 CoffeeScript
+  %a(href='http://coffeescript.org/') http://coffeescript.org
+
+.slide
+  %h2 Using KeithyScript
+  %ul.mini
+    %li git clone https://github.com/keithnorm/coffee-script keithyscript
+    %li optional: source keithyscript/bin/coffee
+    %li ./bin/coffee -o output-dir examples/code.coffee
+

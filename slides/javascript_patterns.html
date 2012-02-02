@@ -1,0 +1,125 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<meta name="viewport" content="width=1024, user-scalable=no">
+	
+	<!-- Replace path with correct path to deck.core.css. -->
+	<link rel="stylesheet" href="../lib/deck.core.css" type="text/css">
+	<link rel="stylesheet" href="../lib/swiss.css" type="text/css">
+	<link rel="stylesheet" href="../lib/fade.css" type="text/css">
+	<link rel="stylesheet" href="../lib/extensions/goto/deck.goto.css" type="text/css">
+	<link rel="stylesheet" href="../lib/extensions/hash/deck.hash.css" type="text/css">
+	<link rel="stylesheet" href="../lib/extensions/menu/deck.menu.css" type="text/css">
+	<link rel="stylesheet" href="../lib/extensions/navigation/deck.navigation.css" type="text/css">
+	<link rel="stylesheet" href="../lib/extensions/status/deck.status.css" type="text/css">
+	<link rel="stylesheet" href="../lib/extensions/scale/deck.scale.css" type="text/css">
+	<link rel="stylesheet" href="../lib/syntaxhighlighter/styles/shCore.css" type="text/css">
+	<link rel="stylesheet" href="../lib/syntaxhighlighter/styles/shThemeDefault.css" type="text/css">
+	
+	<link rel="stylesheet" href="../assets/stylesheets/style.css" type="text/css">
+  
+	
+	<!-- Any other extension CSS files go here. -->
+	
+	<!-- Replace path with correct path to Modernizr file. -->
+	<script src="../lib/modernizr.custom.js"></script>
+</head>
+
+<body class="deck-container">
+
+<div class='slide'>
+  <h1 class='title'>JavaScript Patterns at Groupon</h1>
+</div>
+<div class='slide'>
+  <h2>Prototype Events</h2>
+  <pre class='brush: js;'>Event.onReady(function() {&#x000A;  // code&#x000A;});&#x000A;&#x000A;Event.addBehavior({&#x000A;  'a.todo:click' : function(e) {&#x000A;    // e = event object&#x000A;    // this = clicked object&#x000A;  },&#x000A;  'div.feature:mouseover' : function(e) {&#x000A;    // more code&#x000A;  }&#x000A;});&#x000A;</pre>
+</div>
+<div class='slide'>
+  <h2>jQuery Events</h2>
+  <pre class='brush: js;'>//Old (and Current) Way&#x000A;&#x000A;var handler = function(){ ... };&#x000A;&#x000A;$('selector').bind('click', handler);&#x000A;&#x000A;$('selector').click(handler);&#x000A;&#x000A;$('selector').live('click', handler);&#x000A;&#x000A;$('selector').delegate('sub-selector',&#x000A;                       'click',&#x000A;                       handler);&#x000A;</pre>
+</div>
+<div class='slide'>
+  <h2>jQuery Events</h2>
+  <pre class='brush: js;'>//New Way&#x000A;&#x000A;var handler = function(){ ... };&#x000A;&#x000A;$('selector').on('click', handler);&#x000A;&#x000A;$('selector').on('click',&#x000A;                 'sub-selector',&#x000A;                 handler);&#x000A;&#x000A;$('selector').off('click', handler);&#x000A;</pre>
+</div>
+<div class='slide'>
+  <h2>jQuery Selectors / CSS3</h2>
+  <pre class='brush: js;'>//Simple Selectors&#x000A;$('*');&#x000A;$('a');&#x000A;$('#id');&#x000A;$('.class');&#x000A;$('.class.class2');&#x000A;&#x000A;//Compound Selectors&#x000A;$('#id .class');&#x000A;$('#id > .class');&#x000A;$('#id, #otherid');&#x000A;&#x000A;//Psuedo Selectors&#x000A;$('tr:even');&#x000A;$('input:enabled');&#x000A;$('div:visible');&#x000A;$('li:last-child');&#x000A;$('div:not(.class)');&#x000A;&#x000A;//Attribute Selectors&#x000A;$('div[id*="contains"]');&#x000A;$('div[id$="endswith"');&#x000A;$('div[id^="startswith"');&#x000A;</pre>
+</div>
+<div class='slide'>
+  <h2>Object Namespaces</h2>
+  <pre class='brush: js;'>var Groupon = {};&#x000A;Groupon.Support = {};&#x000A;&#x000A;Groupon.Support.jumpRope = function(){&#x000A;  console.log('jumped some rope!');&#x000A;};&#x000A;</pre>
+</div>
+<div class='slide'>
+  <h2>Object Extensions</h2>
+  <pre class='brush: js;'>function drawGraph(customOptions) {&#x000A;  customOptions = customOptions || {};&#x000A;&#x000A;  var options = {&#x000A;    width: 100,&#x000A;    height: 100,&#x000A;    color: '#2D3',&#x000A;    circles: 12&#x000A;  };&#x000A;&#x000A;  $.extend(true, options, customOptions);&#x000A;&#x000A;  console.log('drawing graph with options:');&#x000A;  console.log(def&#x000A;}&#x000A;&#x000A;drawGraph({&#x000A;  height: 200,&#x000A;  circles: 1&#x000A;});&#x000A;</pre>
+</div>
+<div class='slide'>
+  <h2>CoffeeScript</h2>
+  <a href='http://coffeescript.org/'>http://coffeescript.org</a>
+</div>
+<div class='slide'>
+  <h2>Using KeithyScript</h2>
+  <ul class='mini'>
+    <li>git clone https://github.com/keithnorm/coffee-script keithyscript</li>
+    <li>optional: source keithyscript/bin/coffee</li>
+    <li>./bin/coffee -o output-dir examples/code.coffee</li>
+  </ul>
+</div>
+
+
+	
+<!-- Other extension HTML snippets go here, at the bottom of the deck container. -->
+
+<form action="." method="get" class="goto-form">
+	<label for="goto-slide">Go to slide:</label>
+	<input type="number" name="slidenum" id="goto-slide">
+	<input type="submit" value="Go">
+</form>
+
+<a href="." title="Permalink to this slide" class="deck-permalink">#</a>
+
+<a href="#" class="deck-prev-link" title="Previous">&#8592;</a>
+<a href="#" class="deck-next-link" title="Next">&#8594;</a>
+
+<p class="deck-status">
+	<span class="deck-status-current"></span>
+	/
+	<span class="deck-status-total"></span>
+</p>
+
+<!-- Update these paths to point to the correct files. -->
+<script src="../lib/jquery-1.6.2.min.js"></script>
+<script src="../lib/xregexp-min.js"></script>
+<script src="../lib/deck.core.js"></script>
+<script src="../lib/extensions/goto/deck.goto.js"></script>
+<script src="../lib/extensions/hash/deck.hash.js"></script>
+<script src="../lib/extensions/menu/deck.menu.js"></script>
+<script src="../lib/extensions/navigation/deck.navigation.js"></script>
+<script src="../lib/extensions/status/deck.status.js"></script>
+<script src="../lib/extensions/scale/deck.scale.js"></script>
+<script src="../lib/syntaxhighlighter/src/shCore.js"></script>
+<script src="../lib/syntaxhighlighter/scripts/shBrushRuby.js"></script>
+<script src="../lib/syntaxhighlighter/scripts/shBrushBash.js"></script>
+<script src="../lib/syntaxhighlighter/scripts/shBrushJScript.js"></script>
+<script src="../lib/syntaxhighlighter/scripts/shBrushSql.js"></script>
+<script src="../lib/syntaxhighlighter/scripts/shBrushXml.js"></script>
+<script src="../lib/syntaxhighlighter/scripts/shBrushCss.js"></script>
+<script src="../lib/syntaxhighlighter/scripts/shBrushPlain.js"></script>
+
+<!-- Add any other extension JS files here -->
+
+
+<!-- Initialize the deck. You can put this in an external file if desired. -->
+<script>
+	$(function() {
+		$.deck('.slide');
+	});
+</script>
+
+<script type="text/javascript">
+     SyntaxHighlighter.all()
+</script>
+</body>
+</html>
