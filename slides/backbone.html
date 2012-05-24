@@ -29,42 +29,119 @@
 <body class="deck-container">
 
 <div class='slide'>
-  <h1 class='title'>The "return false;" Conspiracy</h1>
+  <h1 class='title'>What Backbone Means to Me</h1>
 </div>
 <div class='slide'>
-  <h2>The Rule</h2>
+  <h2>What we'll discuss</h2>
   <ul>
-    <li>Return False!</li>
-    <li>Prevents browser behaviour, which is good!</li>
-    <li>Wait! Prevents all browser, which is bad!</li>
+    <li>Why is backbone so awesome</li>
+    <li>Serving up to Backbone</li>
+    <li>Facile and Presenters</li>
+    <li>CS Redesign</li>
+    <li>Testing</li>
+    <li>How @smassa taught me everything I know</li>
   </ul>
 </div>
 <div class='slide'>
-  <h2>The Problem</h2>
+  <h2>MVC for the client?</h2>
   <ul>
-    <li>There are more than one type of click!</li>
-    <li>Right-click</li>
-    <li>Left-click</li>
-    <li>Middle-click</li>
-    <li>Alt-</li>
-    <li>Ctrl- / Cmd-</li>
+    <li>Mehhhhh</li>
+    <li>
+      More like widgets/partials/pieces of a site responsible for
+      <ul>
+        <li>Knowing about data (and how to get it)</li>
+        <li>Rendering itself</li>
+        <li>Rich interaction with the user</li>
+      </ul>
+    </li>
+    <li>Pushes browser-y stuff to the browser, lets the server do server-y stuff</li>
   </ul>
 </div>
 <div class='slide'>
-  <h2>Free Your Mind!</h2>
+  <h2>How the CS App used to work</h2>
   <ul>
-    <li>Don't block an entire class of action</li>
+    <li>Basic rails call stack</li>
+    <ul>
+      <li>Controller</li>
+      <li>Models</li>
+      <li>Groupon Universe (orders, deal, user, API)</li>
+      <li>Back through the controller</li>
+      <li>Rails view to render everything</li>
+      <li>Big packet down to client</li>
+    </ul>
   </ul>
 </div>
 <div class='slide'>
-  <h2>Solution!</h2>
-  <h3>Grabbing The Modifier Code</h3>
-  <pre class='brush: js;'>if(...)&#x000A;  ...&#x000A;</pre>
+  <h2>How the cs app works with backbone</h2>
+  <ul>
+    <li>Basic rails call stack</li>
+    <ul>
+      <li>Controller</li>
+      <li>Small rails view to render frame</li>
+      <li>Small packet down to client</li>
+      <li>
+        Independent bb calls to cs api
+        <ul>
+          <li>Api controller</li>
+          <li>Models</li>
+          <li>Groupon universe (orders, deal, user, api)</li>
+          <li>Back through the controller</li>
+          <li>Presenter</li>
+          <li>JSON back to client</li>
+        </ul>
+      </li>
+    </ul>
+  </ul>
 </div>
 <div class='slide'>
-  <h2>Solution!</h2>
-  <h3>The way it should be</h3>
-  <pre class='brush: js;'>if(...)&#x000A;  ...</pre>
+  <h2>Our Backbone Setup - Widget Style</h2>
+  <ul>
+    <li>Router (identifies URL, calls controller)</li>
+    <li>Controller (retrieves data, renders view)</li>
+    <li>
+      View - WIDGET
+      <ul>
+        <li>Accepts data (model)</li>
+        <li>Binds data to template to render HTML</li>
+        <li>Sets up events (with BB or vent), well scoped</li>
+        <li>Renders sub-views</li>
+      </ul>
+    </li>
+  </ul>
+</div>
+<div class='slide'>
+  <h2>Controller changes</h2>
+  Work in progress, but, we've been changing our controllers to do three tasks.
+  <ul>
+    <li>Delegate to retrievers that parse the incoming params and fetch corresponding data</li>
+    <li>Present the data</li>
+    <li>Authentication</li>
+  </ul>
+</div>
+<div class='slide'>
+  <h2>Presenters, Templates, and Facile</h2>
+  <ul>
+    <li>Presenters. Accepts a set of data and prepares it for BB to use with Facile (and events)</li>
+    <li>Templates. LOGICLESS!</li>
+    <li>Facile. Binds data to templates using classes and ids</li>
+  </ul>
+</div>
+<div class='slide'>
+  <h2>Backbone has affected the CS App in the following ways:</h2>
+  <img src='file:///Users/geoff/code/personal/Presentations/assets/images/backbone/site_performance.png' />
+  <img src='file:///Users/geoff/code/personal/Presentations/assets/images/backbone/throughput.png' />
+</div>
+<div class='slide'>
+  <h2>Testing</h2>
+  <ul>
+    <li>Jasmine+, Require, encapsulated BB views</li>
+    <li>Passing 154 specs in finished in 0.431s</li>
+    <br />
+    <li>Rspec and Presenters</li>
+    <li>Passing 123 specs in finished in 0.24515s</li>
+    <br />
+    <li>Switched to a declarative cucumber style so I hate it much less now</li>
+  </ul>
 </div>
 
 

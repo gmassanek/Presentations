@@ -29,42 +29,31 @@
 <body class="deck-container">
 
 <div class='slide'>
-  <h1 class='title'>The "return false;" Conspiracy</h1>
+  <h1 class='title'>Core Ruby</h1>
 </div>
 <div class='slide'>
-  <h2>The Rule</h2>
+  <h2>What makes Ruby different?</h2>
   <ul>
-    <li>Return False!</li>
-    <li>Prevents browser behaviour, which is good!</li>
-    <li>Wait! Prevents all browser, which is bad!</li>
+    <li>Everything is an object</li>
+    <li>Everything is an expression</li>
+    <li>Blocks</li>
+    <li>Open classes</li>
+    <li>Metaprogramming</li>
   </ul>
 </div>
 <div class='slide'>
-  <h2>The Problem</h2>
+  <h2>Everything is an object</h2>
   <ul>
-    <li>There are more than one type of click!</li>
-    <li>Right-click</li>
-    <li>Left-click</li>
-    <li>Middle-click</li>
-    <li>Alt-</li>
-    <li>Ctrl- / Cmd-</li>
+    <li>No basic types</li>
+    <li>Integers are objects</li>
+    <li>
+      Even <code>true</code>, <code>false</code>, and <code>nil</code>
+      are objects
+    </li>
+    <li>Every message has a receiver</li>
+    <li>Although the receiver is often implicitly <code>self</code></li>
+    <li>Operators are actually methods</li>
   </ul>
-</div>
-<div class='slide'>
-  <h2>Free Your Mind!</h2>
-  <ul>
-    <li>Don't block an entire class of action</li>
-  </ul>
-</div>
-<div class='slide'>
-  <h2>Solution!</h2>
-  <h3>Grabbing The Modifier Code</h3>
-  <pre class='brush: js;'>if(...)&#x000A;  ...&#x000A;</pre>
-</div>
-<div class='slide'>
-  <h2>Solution!</h2>
-  <h3>The way it should be</h3>
-  <pre class='brush: js;'>if(...)&#x000A;  ...</pre>
 </div>
 
 

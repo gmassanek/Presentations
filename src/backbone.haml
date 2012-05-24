@@ -1,0 +1,98 @@
+.slide
+  %h1.title What Backbone Means to Me
+  
+.slide
+  %h2 What we'll discuss
+  %ul
+    %li Why is backbone so awesome
+    %li Serving up to Backbone
+    %li Facile and Presenters
+    %li CS Redesign
+    %li Testing
+    %li How @smassa taught me everything I know
+    
+.slide
+  %h2 MVC for the client?
+  %ul
+    %li Mehhhhh
+    %li
+      More like widgets/partials/pieces of a site responsible for
+      %ul
+        %li Knowing about data (and how to get it)
+        %li Rendering itself
+        %li Rich interaction with the user
+    %li Pushes browser-y stuff to the browser, lets the server do server-y stuff
+
+.slide
+  %h2 How the CS App used to work
+  %ul
+    %li Basic rails call stack
+    %ul
+      %li Controller
+      %li Models
+      %li Groupon Universe (orders, deal, user, API)
+      %li Back through the controller
+      %li Rails view to render everything
+      %li Big packet down to client
+
+.slide
+  %h2 How the cs app works with backbone
+  %ul
+    %li Basic rails call stack
+    %ul
+      %li Controller
+      %li Small rails view to render frame
+      %li Small packet down to client
+      %li
+        Independent bb calls to cs api
+        %ul
+          %li Api controller
+          %li Models
+          %li Groupon universe (orders, deal, user, api)
+          %li Back through the controller
+          %li Presenter
+          %li JSON back to client
+
+.slide
+  %h2 Our Backbone Setup - Widget Style
+  %ul
+    %li Router (identifies URL, calls controller)
+    %li Controller (retrieves data, renders view)
+    %li
+      View - WIDGET
+      %ul
+        %li Accepts data (model)
+        %li Binds data to template to render HTML
+        %li Sets up events (with BB or vent), well scoped
+        %li Renders sub-views
+.slide
+  %h2 Controller changes
+  Work in progress, but, we've been changing our controllers to do three tasks.
+  %ul
+    %li Delegate to retrievers that parse the incoming params and fetch corresponding data
+    %li Present the data
+    %li Authentication
+
+.slide
+  %h2 Presenters, Templates, and Facile
+  %ul
+    %li Presenters. Accepts a set of data and prepares it for BB to use with Facile (and events)
+    %li Templates. LOGICLESS!
+    %li Facile. Binds data to templates using classes and ids
+
+.slide
+  %h2 Backbone has affected the CS App in the following ways:
+  %img{:src => 'file:///Users/geoff/code/personal/Presentations/assets/images/backbone/site_performance.png'}
+  %img{:src => 'file:///Users/geoff/code/personal/Presentations/assets/images/backbone/throughput.png'}
+
+.slide
+  %h2 Testing
+  %ul
+    %li Jasmine+, Require, encapsulated BB views
+    %li Passing 154 specs in finished in 0.431s
+    %br
+    %li Rspec and Presenters
+    %li Passing 123 specs in finished in 0.24515s
+    %br
+    %li Switched to a declarative cucumber style so I hate it much less now
+
